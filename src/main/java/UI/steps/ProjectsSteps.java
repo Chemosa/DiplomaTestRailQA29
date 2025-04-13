@@ -98,9 +98,9 @@ public class ProjectsSteps extends BaseSteps {
 
     @Step("Delete all projects if the are presented.")
     public void deleteProjectAfterTest(Project project) {
-        adminPage.clickLogo();
-        if (!projectsListPage.getListOfProjects().isEmpty()) {
-            headerPage
+        if (!openedPage(LOGIN_PAGE_URL) & !projectsListPage.getListOfProjects().isEmpty()) {
+            adminPage
+                    .clickLogo()
                     .clickNavigationAdminButton()
                     .clickOnProjectsSidebarItem()
                     .deleteAllProject();

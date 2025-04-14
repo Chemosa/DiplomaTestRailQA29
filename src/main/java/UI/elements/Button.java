@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Button {
+
+    private static final String BUTTON_XPATH = "//*[@data-testid=\"%s\"]";
+
     WebDriver driver;
 
     public Button(WebDriver driver) {
@@ -15,7 +18,7 @@ public class Button {
      * This method clicks on specified button found by dataTestId.
      */
     public void clickButton(String dataTestId) {
-        driver.findElement(By.xpath(String.format("//*[@data-testid=\"%s\"]", dataTestId))).click();
+        driver.findElement(By.xpath(String.format(BUTTON_XPATH, dataTestId))).click();
     }
 
     /**

@@ -10,6 +10,8 @@ import java.time.Duration;
 
 public class Waiter {
 
+    private static final String ELEMENT_TO_WAIT_XPATH = "//*[@data-testid = \"%s\"]";
+
     /**
      * This method waits till specified element will be displayed.
      * @param driver
@@ -18,7 +20,7 @@ public class Waiter {
      */
     public void waitForElementDisplayed(WebDriver driver, String elementDataTestId, long seconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
-        WebElement element = driver.findElement(By.xpath(String.format("//*[@data-testid = \"%s\"]", elementDataTestId)));
+        WebElement element = driver.findElement(By.xpath(String.format(ELEMENT_TO_WAIT_XPATH, elementDataTestId)));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 

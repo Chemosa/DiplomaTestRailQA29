@@ -1,6 +1,4 @@
-package UITests.constants;
-
-import utils.PropertyReader;
+package uiTests.constants;
 
 public interface ITestConstants {
 

@@ -22,7 +22,7 @@ public class AddProjectModalPage extends BasePage {
     public ProjectPage fillNewProjectForm(String projectName, String announcement) {
         new Input(driver, "addProjectNameInput").writeTextToInput(projectName);
         new Input(driver, "addEditProjectAnnouncement").writeTextToInput(announcement);
-        new Checkbox(driver).selectCheckbox("addEditProjectShowAnnouncement");
+        new Checkbox(driver).selectCheckbox("addEditProjectShowAnnouncement", true);
         new Button(driver).clickButton("addEditProjectAddButton");
         log.info("Project '{}' is created.", projectName);
         return new ProjectPage(driver);

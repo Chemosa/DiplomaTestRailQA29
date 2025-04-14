@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Checkbox {
+
+    private static final String CHECKBOX_XPATH = "//*[@data-testid=\"%s\"]";
+
     WebDriver driver;
 
     public Checkbox(WebDriver driver) {
@@ -14,16 +17,27 @@ public class Checkbox {
     /**
      * This method select specified checkbox found by xpath.
      * @param dataTestIdOfCheckbox
+     * @param selected
      */
-    public void selectCheckbox(String dataTestIdOfCheckbox) {
-        driver.findElement(By.xpath(String.format("//*[@data-testid = \"%s\"]", dataTestIdOfCheckbox))).click();
+    public void selectCheckbox(String dataTestIdOfCheckbox, boolean selected) {
+        WebElement checkbox = driver.findElement(By.xpath(String.format(CHECKBOX_XPATH, dataTestIdOfCheckbox)));
+        if (selected && !checkbox.isSelected()) {
+            checkbox.click();
+        } else if(!selected && checkbox.isSelected()) {
+            checkbox.click();
+        }
     }
 
     /**
      * This method select specified checkbox as element.
      * @param checkbox
+     * @param selected
      */
-    public void selectElementCheckbox(WebElement checkbox) {
-        checkbox.click();
+    public void selectElementCheckbox(WebElement checkbox, boolean selected) {
+       if (selected && !checkbox.isSelected()) {
+           checkbox.click();
+       } else if(!selected && checkbox.isSelected()) {
+           checkbox.click();
+       }
     }
 }

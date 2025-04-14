@@ -1,12 +1,19 @@
 package UI.pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
+@Log4j2
 public class ProjectPage extends BasePage {
 
-    private static final String TITLE_INFO_MESSAGE_XPATH = "//*[@class=\"empty-title\"]";
-    private static final String PROJECT_NAME_XPATH = "//*[@data-testid=\"testCaseContentHeaderTitle\"]";
+    @FindBy(xpath = "//*[@class=\"empty-title\"]")
+    WebElement titleInfoMessage;
+
+    @FindBy(xpath = "//*[@data-testid=\"testCaseContentHeaderTitle\"]")
+    WebElement projectNameInTitle;
 
     public ProjectPage(WebDriver driver) {
         super(driver);
@@ -17,7 +24,13 @@ public class ProjectPage extends BasePage {
      * @return
      */
     public String getTitleFromInfoMessage() {
-        return driver.findElement(By.xpath(TITLE_INFO_MESSAGE_XPATH)).getText();
+        try {
+            log.info("Getting informational message.");
+            return titleInfoMessage.getText();
+        } catch (Exception noMessage) {
+            log.error("Failed to get error message.", noMessage);
+            return "";
+        }
     }
 
     /**
@@ -25,7 +38,13 @@ public class ProjectPage extends BasePage {
      * @return
      */
     public String getProjectName() {
-        return driver.findElement(By.xpath(PROJECT_NAME_XPATH)).getText();
+        try {
+            log.info("Getting project name.");
+            return projectNameInTitle.getText();
+        } catch (Exception noName) {
+            log.error("Failed to get error message.", noName);
+            return "";
+        }
     }
 
     /**

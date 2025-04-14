@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class Input {
+
+    private static final String INPUT_XPATH = "//*[@data-testid=\"%s\"]";
+
     WebDriver driver;
     String dataTestIdOfInput;
 
@@ -18,7 +21,7 @@ public class Input {
      * @return
      */
     public Input writeTextToInput(String textToWrite) {
-        driver.findElement(By.xpath(String.format("//*[@data-testid=\"%s\"]", dataTestIdOfInput))).sendKeys(textToWrite);
+        driver.findElement(By.xpath(String.format(INPUT_XPATH, dataTestIdOfInput))).sendKeys(textToWrite);
         return this;
     }
 }

@@ -60,10 +60,10 @@ public class ProjectsSteps extends BaseSteps {
                 .clickLogo()
                 .waitProjectListIsLoaded();
         if (projectsListPage.getListOfProjects().isEmpty()) {
-        projectsListPage
-                .clickAddProjectFromDashboardButton()
-                .fillNewProjectForm(project.getProjectName(), project.getAnnouncement());
-        checkFirstProjectNameAndInfoMessageTitle(project);
+            projectsListPage
+                    .clickAddProjectFromDashboardButton()
+                    .fillNewProjectForm(project.getProjectName(), project.getAnnouncement());
+            checkFirstProjectNameAndInfoMessageTitle(project);
         } else {
             projectsListPage
                     .clickAddProjectFromDashboardButton()
@@ -75,15 +75,17 @@ public class ProjectsSteps extends BaseSteps {
 
     @Step("Check name of the first project and text of appeared info message.")
     public ProjectsSteps checkFirstProjectNameAndInfoMessageTitle(Project project) {
-        Assert.assertEquals(projectPage.getProjectName(), project.getProjectName());
-        Assert.assertEquals(projectPage.getTitleFromInfoMessage(), "Congratulations! You have created your first project");
+        softAssert.assertEquals(projectPage.getProjectName(), project.getProjectName());
+        softAssert.assertEquals(projectPage.getTitleFromInfoMessage(), "Congratulations! You have created your first project");
+        softAssert.assertAll();
         return this;
     }
 
     @Step("Check name of the example project and that chart is presented.")
     public ProjectsSteps checkExampleProjectNameAndChart(Project project) {
-        Assert.assertEquals(projectPage.getProjectName(), project.getProjectName());
-        Assert.assertTrue(projectPage.projectChartIsDisplayed());
+        softAssert.assertEquals(projectPage.getProjectName(), project.getProjectName());
+        softAssert.assertTrue(projectPage.projectChartIsDisplayed());
+        softAssert.assertAll();
         return this;
     }
 
@@ -97,10 +99,9 @@ public class ProjectsSteps extends BaseSteps {
     }
 
     @Step("Delete all projects if the are presented.")
-    public void deleteProjectAfterTest(Project project) {
-        if (!openedPage(LOGIN_PAGE_URL) & !projectsListPage.getListOfProjects().isEmpty()) {
+    public void deleteProjectAfterTest() {
+        if (!openedPage(LOGIN_PAGE_URL) && !projectsListPage.getListOfProjects().isEmpty()) {
             adminPage
-                    .clickLogo()
                     .clickNavigationAdminButton()
                     .clickOnProjectsSidebarItem()
                     .deleteAllProject();

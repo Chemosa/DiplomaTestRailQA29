@@ -15,7 +15,6 @@ public class AdminPage extends HeaderPage {
 
     private static final String SIDEBAR_ITEM_XPATH = "//*[@data-testid=\"%s\"]";
     private static final String DELETE_PROJECT_BY_NAME_XPATH = "//*[text() = \"%s\"]/ancestor::tr//div[@data-testid=\"projectDeleteButton\"]";
-    private static final String DELETE_PROJECT_BUTTON_XPATH = "//div[@data-testid=\"projectDeleteButton\"]";
     private static final String PROJECT_NAME_XPATH = "//*[text() = \"%s\"]";
 
     @FindBy(xpath = "//*[contains(text(), \"Yes, delete\")]/../following-sibling::input")
@@ -23,6 +22,12 @@ public class AdminPage extends HeaderPage {
 
     @FindBy(xpath = "//div[contains(text(), 'Successfully added the new project.')]")
     WebElement successfulAddedProjectMessage;
+
+    @FindBy(xpath = "//div[@data-testid=\"projectDeleteButton\"]")
+    WebElement deleteProjectButton;
+
+    @FindBy(xpath = "//span[@class = \"hidden hoverAction\"]/../a")
+    List<WebElement> projectsOnPageList;
 
     public AdminPage(WebDriver driver) {
         super(driver);
@@ -45,7 +50,7 @@ public class AdminPage extends HeaderPage {
      */
     public AdminPage deleteProject(String projectName) {
         driver.findElement(By.xpath(String.format(DELETE_PROJECT_BY_NAME_XPATH, projectName))).click();
-        new Checkbox(driver).selectElementCheckbox(deleteConfirmationCheckbox);
+        new Checkbox(driver).selectElementCheckbox(deleteConfirmationCheckbox, true);
         new Button(driver).clickButton("caseFieldsTabDeleteDialogButtonOk");
         waiter.waitForElementDisplayed(driver, "messageSuccessDivBox", 10);
         waiter.waitForElementDisappearing(driver, String.format(PROJECT_NAME_XPATH, projectName), 10);
@@ -59,14 +64,13 @@ public class AdminPage extends HeaderPage {
      */
     public AdminPage deleteAllProject() {
         while (true) {
-            List<WebElement> projectsInList = driver.findElements(By.xpath("//span[@class = \"hidden hoverAction\"]/../a"));
-            if (projectsInList.isEmpty()) {
+            if (projectsOnPageList.isEmpty()) {
                 log.info("All projects are deleted.");
                 break;
             }
-            for (int i = 0; i < projectsInList.size(); i++) {
-                driver.findElement(By.xpath(DELETE_PROJECT_BUTTON_XPATH)).click();
-                new Checkbox(driver).selectElementCheckbox(deleteConfirmationCheckbox);
+            for (int i = 0; i < projectsOnPageList.size(); i++) {
+                deleteProjectButton.click();
+                new Checkbox(driver).selectElementCheckbox(deleteConfirmationCheckbox, true);
                 new Button(driver).clickButton("caseFieldsTabDeleteDialogButtonOk");
                 waiter.waitForElementDisplayed(driver, "messageSuccessDivBox", 10);
             }
@@ -80,9 +84,8 @@ public class AdminPage extends HeaderPage {
      * @return
      */
     public boolean checkProjectIsAdded(String projectName) {
-        List<WebElement> projectsInList = driver.findElements(By.xpath("//span[@class = \"hidden hoverAction\"]/../a"));
         boolean isAdded = false;
-        for(WebElement project : projectsInList) {
+        for(WebElement project : projectsOnPageList) {
             if(project.getText().equals(projectName) & successfulAddedProjectMessage.isDisplayed()) {
             isAdded = true;
             }

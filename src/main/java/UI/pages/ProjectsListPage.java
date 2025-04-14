@@ -2,7 +2,6 @@ package UI.pages;
 
 import UI.elements.Button;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +11,8 @@ import java.util.List;
 @Log4j2
 public class ProjectsListPage extends HeaderPage {
 
-    private static final String PROJECT_NAME_LIST_XPATH = "//*[@class=\"summary-title text-ppp\"]/a";
+    @FindBy(xpath = "//*[@class=\"summary-title text-ppp\"]/a")
+    List<WebElement> listOfProjects;
 
     @FindBy(id = "navigation-empty-addproject")
     WebElement addFirstProjectButton;
@@ -68,8 +68,7 @@ public class ProjectsListPage extends HeaderPage {
      * @return
      */
     public List<WebElement> getListOfProjects() {
-        return driver.findElements(By.xpath(PROJECT_NAME_LIST_XPATH));
+        clickLogo();
+        return listOfProjects;
     }
 }
-
-

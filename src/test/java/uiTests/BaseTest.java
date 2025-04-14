@@ -1,11 +1,11 @@
-package UITests;
+package uiTests;
 
 import UI.constants.IConstants;
 import UI.entities.Project;
 import UI.steps.BaseSteps;
 import UI.steps.LoginSteps;
 import UI.steps.ProjectsSteps;
-import UITests.constants.ITestConstants;
+import uiTests.constants.ITestConstants;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import listeners.TestListener;
 import org.openqa.selenium.WebDriver;
@@ -56,7 +56,7 @@ public class BaseTest implements ITestConstants, IConstants {
 
     @AfterMethod(alwaysRun = true)
     public void deleteProjectAfterTest() {
-        projectsSteps.deleteProjectAfterTest(project);
+        projectsSteps.deleteProjectAfterTest();
     }
 
     @AfterMethod

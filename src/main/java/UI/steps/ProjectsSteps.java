@@ -100,7 +100,7 @@ public class ProjectsSteps extends BaseSteps {
 
     @Step("Delete all projects if the are presented.")
     public void deleteProjectAfterTest() {
-        if (!openedPage(LOGIN_PAGE_URL) && !projectsListPage.getListOfProjects().isEmpty()) {
+        if (!isPageOpened(LOGIN_PAGE_URL) && !projectsListPage.getListOfProjects().isEmpty()) {
             adminPage
                     .clickNavigationAdminButton()
                     .clickOnProjectsSidebarItem()

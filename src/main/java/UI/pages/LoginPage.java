@@ -9,13 +9,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @Log4j2
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
-    private static final String LOGIN_PAGE_ERROR_MESSAGE_XPATH = "//*[@class = 'loginpage-message-title ']";
     private static final String ERRORS_UNDER_FIELDS_XPATH = "//*[contains(text(), '%s')]";
 
-    @FindBy(id = "button_primary")
-    WebElement loginButton;
+    @FindBy(xpath = "//*[@class = 'loginpage-message-title ']")
+    WebElement topErrorMessageOnLoginPage;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -39,10 +38,10 @@ public class LoginPage extends BasePage{
      * @return
      */
     public ProjectsListPage fillLoginFields(String username, String password) {
-        new Input(driver, "name").writeCredentialsToLogin(username);
-        new Input(driver, "password").writeCredentialsToLogin(password);
-        new Button(driver).clickButton(loginButton);
-        if(driver.getCurrentUrl().contains(PROJECTS_PAGE_URL)){
+        new Input(driver, "loginIdName").writeTextToInput(username);
+        new Input(driver, "loginPasswordFormDialog").writeTextToInput(password);
+        new Button(driver).clickButton("loginButtonPrimary");
+        if (driver.getCurrentUrl().contains(PROJECTS_LIST_PAGE_URL)) {
             log.info("User '{}' is successfully login", username);
         }
         return new ProjectsListPage(driver);
@@ -53,7 +52,13 @@ public class LoginPage extends BasePage{
      * @return
      */
     public String getErrorMessage() {
-        return driver.findElement(By.xpath(LOGIN_PAGE_ERROR_MESSAGE_XPATH)).getText();
+        try {
+            log.info("Getting error message.");
+            return topErrorMessageOnLoginPage.getText();
+        } catch (Exception noMessage) {
+            log.error("Failed to get error message.", noMessage);
+            return "";
+        }
     }
 
     /**

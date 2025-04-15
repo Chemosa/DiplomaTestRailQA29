@@ -5,7 +5,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-public class LoginSteps extends BaseSteps{
+public class LoginSteps extends BaseSteps {
 
     LoginPage loginPage;
 
@@ -15,7 +15,7 @@ public class LoginSteps extends BaseSteps{
     }
 
     @Step("Login by user: {email}")
-    public LoginSteps login (String email, String password, String url) {
+    public LoginSteps login(String email, String password, String url) {
         loginPage
                 .openLoginPage(url)
                 .fillLoginFields(email, password);

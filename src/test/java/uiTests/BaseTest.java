@@ -1,9 +1,11 @@
-package UITests;
+package uiTests;
 
 import UI.constants.IConstants;
+import UI.entities.Project;
 import UI.steps.BaseSteps;
 import UI.steps.LoginSteps;
-import UITests.constants.ITestConstants;
+import UI.steps.ProjectsSteps;
+import uiTests.constants.ITestConstants;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import listeners.TestListener;
 import org.openqa.selenium.WebDriver;
@@ -17,14 +19,14 @@ import org.testng.annotations.Listeners;
 import org.testng.asserts.SoftAssert;
 import utils.PropertyReader;
 
-import java.util.concurrent.TimeUnit;
-
 @Listeners(TestListener.class)
 public class BaseTest implements ITestConstants, IConstants {
     WebDriver driver;
     BaseSteps baseSteps;
     LoginSteps loginSteps;
+    ProjectsSteps projectsSteps;
     SoftAssert softAssert;
+    Project project;
 
     String EMAIL = PropertyReader.getProperty("email");
     String PASSWORD = PropertyReader.getProperty("password");
@@ -38,7 +40,6 @@ public class BaseTest implements ITestConstants, IConstants {
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         iTestContext.setAttribute("driver", driver);
         softAssert = new SoftAssert();
         PageFactory.initElements(driver, this);
@@ -47,8 +48,15 @@ public class BaseTest implements ITestConstants, IConstants {
     }
 
     public void initPages() {
+        project = new Project();
         baseSteps = new BaseSteps(driver);
         loginSteps = new LoginSteps(driver);
+        projectsSteps = new ProjectsSteps(driver);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void deleteProjectAfterTest() {
+        projectsSteps.deleteProjectAfterTest();
     }
 
     @AfterMethod

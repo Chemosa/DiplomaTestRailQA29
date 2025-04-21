@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 @Log4j2
 public class ProjectPage extends BasePage {
 
+    private static final String SIDEBAR_PROJECT_ITEM_XPATH = "//*[@data-testid=\"%s\"]";
+
     @FindBy(xpath = "//*[@class=\"empty-title\"]")
     WebElement titleInfoMessage;
 
@@ -53,5 +55,27 @@ public class ProjectPage extends BasePage {
      */
     public boolean projectChartIsDisplayed() {
         return driver.findElement(By.id("chart-line-fc")).isDisplayed();
+    }
+
+    /**
+     * This method clicks on sidebar button to open Test Cases page.
+     * @return
+     */
+    public TestCasePage clickOnTestCasesSidebarItem() {
+        waiter.waitForElementDisplayed(driver, "navigateToCasesButton", 10);
+        driver.findElement(By.xpath(String.format(SIDEBAR_PROJECT_ITEM_XPATH, "navigateToCasesButton"))).click();
+        waiter.waitForPageOpened(driver, TEST_CASES_LIST_PAGE_URL, 10);
+        return new TestCasePage(driver);
+    }
+
+    /**
+     * This method clicks on sidebar button to open Test Runs & Results page.
+     * @return
+     */
+    public TestRunsAndResultsPage clickOnTestRunsSidebarItem() {
+        waiter.waitForElementDisplayed(driver, "navigateToRunsButton", 10);
+        driver.findElement(By.xpath(String.format(SIDEBAR_PROJECT_ITEM_XPATH, "navigateToRunsButton"))).click();
+        waiter.waitForPageOpened(driver, TEST_RUN_LIST_PAGE_URL, 10);
+        return new TestRunsAndResultsPage(driver);
     }
 }

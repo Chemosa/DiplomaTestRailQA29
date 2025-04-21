@@ -1,5 +1,6 @@
 package UI.elements;
 
+import UI.waiters.Waiter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ public class Button {
     private static final String BUTTON_XPATH = "//*[@data-testid=\"%s\"]";
 
     WebDriver driver;
+    Waiter waiter = new Waiter();
 
     public Button(WebDriver driver) {
         this.driver = driver;
@@ -22,10 +24,11 @@ public class Button {
     }
 
     /**
-     * This method clicks on specified as web element button.
+     * This method waits till element will be clickable and clicks on specified as web element button.
      * @param element
      */
     public void clickElementButton(WebElement element) {
+        waiter.waitForWebElementBeClickable(driver, element, 10);
         element.click();
     }
 }

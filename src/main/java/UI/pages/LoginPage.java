@@ -38,8 +38,8 @@ public class LoginPage extends BasePage {
      * @return
      */
     public ProjectsListPage fillLoginFields(String username, String password) {
-        new Input(driver, "loginIdName").writeTextToInput(username);
-        new Input(driver, "loginPasswordFormDialog").writeTextToInput(password);
+        new Input(driver).writeTextToInput("loginIdName", username);
+        new Input(driver).writeTextToInput("loginPasswordFormDialog", password);
         new Button(driver).clickButton("loginButtonPrimary");
         if (driver.getCurrentUrl().contains(PROJECTS_LIST_PAGE_URL)) {
             log.info("User '{}' is successfully login", username);

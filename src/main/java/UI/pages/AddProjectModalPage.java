@@ -20,8 +20,8 @@ public class AddProjectModalPage extends BasePage {
      * @return
      */
     public ProjectPage fillNewProjectForm(String projectName, String announcement) {
-        new Input(driver, "addProjectNameInput").writeTextToInput(projectName);
-        new Input(driver, "addEditProjectAnnouncement").writeTextToInput(announcement);
+        new Input(driver).writeTextToInput("addProjectNameInput", projectName);
+        new Input(driver).writeTextToInput("addEditProjectAnnouncement", announcement);
         new Checkbox(driver).selectCheckbox("addEditProjectShowAnnouncement", true);
         new Button(driver).clickButton("addEditProjectAddButton");
         log.info("Project '{}' is created.", projectName);
@@ -34,7 +34,7 @@ public class AddProjectModalPage extends BasePage {
      * @return
      */
     public ProjectPage fillAddExampleProjectForm(String projectName) {
-        new Input(driver, "addExampleProjectDialogName").writeTextToInput(projectName);
+        new Input(driver).writeTextToInput("addExampleProjectDialogName", projectName);
         new Button(driver).clickButton("addExampleProjectDialogSubmit");
         waiter.waitForPageOpened(driver, PROJECT_PAGE_URL, 60);
         log.info("Example project '{}' is created.", projectName);

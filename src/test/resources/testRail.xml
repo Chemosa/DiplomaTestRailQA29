@@ -1,0 +1,7 @@
+<suite name="TestRail Suite" parallel="methods" thread-count="5">
+    <test name="TestRail registration test">
+        <classes>
+            <class name="utils.RunnerTest"/>
+        </classes>
+    </test>
+</suite>

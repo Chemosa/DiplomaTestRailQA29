@@ -31,7 +31,7 @@ public class TestRunsTests extends BaseTest{
         projectsSteps
                 .createProjectFromDashboard(project);
         testCasesSteps
-                .createSection(section)
+                .createSection(project, section)
                 .createTestCaseFromSidebar(testCase);
         testRunsAndResultsSteps
                 .createTestRun(testRun);
@@ -60,7 +60,7 @@ public class TestRunsTests extends BaseTest{
         projectsSteps
                 .createProjectFromDashboard(project);
         testCasesSteps
-                .createSection(section)
+                .createSection(project, section)
                 .createCaseFromSection(testCase1, testCase2);
         testRunsAndResultsSteps
                 .createTestRun(testRun)

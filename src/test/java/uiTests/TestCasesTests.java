@@ -18,7 +18,7 @@ public class TestCasesTests extends BaseTest {
         projectsSteps
                 .createProjectFromDashboard(project);
         testCasesSteps
-                .createSection(section)
+                .createSection(project, section)
                 .deleteSection(section);
     }
 
@@ -37,7 +37,7 @@ public class TestCasesTests extends BaseTest {
         projectsSteps
                 .createProjectFromDashboard(project);
         testCasesSteps
-                .createSection(section)
+                .createSection(project, section)
                 .createSubsection(subsection);
     }
 
@@ -60,7 +60,7 @@ public class TestCasesTests extends BaseTest {
         projectsSteps
                 .createProjectFromDashboard(project);
         testCasesSteps
-                .createSection(section)
+                .createSection(project, section)
                 .createTestCaseFromSidebar(testCase);
     }
 
@@ -82,7 +82,7 @@ public class TestCasesTests extends BaseTest {
         projectsSteps
                 .createProjectFromDashboard(project);
         testCasesSteps
-                .createSection(section)
+                .createSection(project, section)
                 .createCaseFromSection(testCase1, testCase2);
     }
 }

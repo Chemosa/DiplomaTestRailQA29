@@ -2,6 +2,7 @@ package UI.constants;
 
 public interface IConstants {
     String LOGIN_PAGE_URL = "/index.php?/auth/login/";
+    String ADMIN_PAGE_URL = "/index.php?/admin/projects/";
     String PROJECTS_LIST_PAGE_URL = "/index.php?/dashboard";
     String PROJECT_PAGE_URL = "/index.php?/projects/overview/";
     String REGISTRATION_PAGE_URL = "https://secure.testrail.com/customers/testrail/trial/?type=signup";

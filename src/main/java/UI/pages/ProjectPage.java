@@ -1,15 +1,19 @@
 package UI.pages;
 
+import UI.elements.Button;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 @Log4j2
 public class ProjectPage extends BasePage {
 
     private static final String SIDEBAR_PROJECT_ITEM_XPATH = "//*[@data-testid=\"%s\"]";
+    private static final String PROJECT_NAME_ON_ADMIN_PAGE_XPATH = "//*[text() = \"%s\"]";
+    private static final String PROJECT_PAGE_BUTTON_ON_ADMIN_PAGE_XPATH = "//*[text() = \"%s\"]/../*[@class=\"hidden hoverAction\"]/a";
 
     @FindBy(xpath = "//*[@class=\"empty-title\"]")
     WebElement titleInfoMessage;
@@ -61,7 +65,12 @@ public class ProjectPage extends BasePage {
      * This method clicks on sidebar button to open Test Cases page.
      * @return
      */
-    public TestCasePage clickOnTestCasesSidebarItem() {
+    public TestCasePage clickOnTestCasesSidebarItem(String projectName) {
+        if(driver.getCurrentUrl().contains(ADMIN_PAGE_URL)) {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(driver.findElement(By.xpath(String.format(PROJECT_NAME_ON_ADMIN_PAGE_XPATH, projectName)))).build().perform();
+            new Button(driver).clickElementButton(driver.findElement(By.xpath(String.format(PROJECT_PAGE_BUTTON_ON_ADMIN_PAGE_XPATH, projectName))));
+        }
         waiter.waitForElementDisplayed(driver, "navigateToCasesButton", 10);
         driver.findElement(By.xpath(String.format(SIDEBAR_PROJECT_ITEM_XPATH, "navigateToCasesButton"))).click();
         waiter.waitForPageOpened(driver, TEST_CASES_LIST_PAGE_URL, 10);

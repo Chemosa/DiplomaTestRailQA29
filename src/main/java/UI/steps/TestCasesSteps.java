@@ -1,5 +1,6 @@
 package UI.steps;
 
+import UI.entities.Project;
 import UI.entities.Section;
 import UI.entities.TestCase;
 import UI.pages.*;
@@ -27,9 +28,9 @@ public class TestCasesSteps extends BaseSteps {
     }
 
     @Step("Creates section in project.")
-    public TestCasesSteps createSection(Section section) {
+    public TestCasesSteps createSection(Project project, Section section) {
         projectPage
-                .clickOnTestCasesSidebarItem()
+                .clickOnTestCasesSidebarItem(project.getProjectName())
                 .clickAddSectionButton()
                 .fillAddSectionModal(section);
         Assert.assertTrue(testCasePage.isSectionCreated(section.getSectionName()));

@@ -41,7 +41,7 @@ public class CucumberSteps implements IConstants {
     @When("User fill the registration form")
     public void userFillTheRegistrationForm() {
         registrationPage
-                .fillRegistrationPage();
+                .fillRegistrationPage("Armenia", "10");
     }
 
     @And("Click submission button to create account")
@@ -52,7 +52,7 @@ public class CucumberSteps implements IConstants {
 
     @Then("Message about confirmation via email should appear an another page")
     public void messageAboutConfirmationViaEmailShouldAppearAnAnotherPage() {
-        softAssert.assertTrue(baseSteps.pageIsLoaded(REGISTRATION_CONFIRM_PAGE_URL));
+        softAssert.assertTrue(baseSteps.isPageLoaded(REGISTRATION_CONFIRM_PAGE_URL));
         softAssert.assertTrue(registrationPage.getConfirmationMessage().contains("Waiting for email confirmation from"));
         softAssert.assertAll();
     }

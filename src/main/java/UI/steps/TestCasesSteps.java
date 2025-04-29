@@ -28,7 +28,7 @@ public class TestCasesSteps extends BaseSteps {
     }
 
     @Step("Creates section in project.")
-    public TestCasesSteps createSection(Project project, Section section) {
+    public TestCasesSteps checkCreatingSection(Project project, Section section) {
         projectPage
                 .clickOnTestCasesSidebarItem(project.getProjectName())
                 .clickAddSectionButton()
@@ -38,7 +38,7 @@ public class TestCasesSteps extends BaseSteps {
     }
 
     @Step("Creates subsection in section.")
-    public TestCasesSteps createSubsection(Section subsection) {
+    public TestCasesSteps checkCreatingSubsection(Section subsection) {
         testCasePage
                 .clickAddSubsectionButton()
                 .fillAddSectionModal(subsection);
@@ -47,7 +47,7 @@ public class TestCasesSteps extends BaseSteps {
     }
 
     @Step("Deletes specified section.")
-    public TestCasesSteps deleteSection(Section section) {
+    public TestCasesSteps checkDeletingSection(Section section) {
         testCasePage
                 .deleteSection(section);
         Assert.assertTrue(testCasePage.sectionNamesList().isEmpty());
@@ -55,15 +55,16 @@ public class TestCasesSteps extends BaseSteps {
     }
 
     @Step("Creates new test case with button on sidebar.")
-    public TestCasesSteps createTestCaseFromSidebar(TestCase testcase) {
-        testCasePage.clickAddTestCaseButton()
+    public TestCasesSteps checkCreatingTestCaseFromSidebar(TestCase testcase) {
+        testCasePage
+                .clickAddTestCaseButton()
                 .fillAddTestCaseModal(testcase);
         Assert.assertEquals(testCasePage.getTestCaseName(), testcase.getTestcaseTitle());
         return this;
     }
 
     @Step("Creates some cases with default parameters in section.")
-    public TestCasesSteps createCaseFromSection(TestCase... testCases) {
+    public TestCasesSteps checkCreatingCaseFromSection(TestCase... testCases) {
         testCasePage
                 .clickAddCaseLink()
                 .addCase(testCases);

@@ -4,10 +4,11 @@ import UI.entities.Section;
 import UI.entities.TestCase;
 import UI.entities.TestRun;
 import org.testng.annotations.Test;
+import utils.Retry;
 
 public class TestRunsTests extends BaseTest{
 
-    @Test(description = "Test creation of test run.")
+    @Test(description = "Test creation of test run.", retryAnalyzer = Retry.class)
     public void createTestRunFromSidebarTest() {
         project.setProjectName("Project with test run");
         project.setAnnouncement("Announcement for project");
@@ -29,12 +30,12 @@ public class TestRunsTests extends BaseTest{
         loginSteps
                 .login(EMAIL, PASSWORD, ACCESS_USER_URL + LOGIN_PAGE_URL);
         projectsSteps
-                .createProjectFromDashboard(project);
+                .createProjectFromDashboardAndCheckCreated(project);
         testCasesSteps
-                .createSection(project, section)
-                .createTestCaseFromSidebar(testCase);
+                .checkCreatingSection(project, section)
+                .checkCreatingTestCaseFromSidebar(testCase);
         testRunsAndResultsSteps
-                .createTestRun(testRun);
+                .checkCreatingTestRun(testRun);
     }
 
     @Test(description = "Test changing of test case status to passed in test run.")
@@ -58,12 +59,12 @@ public class TestRunsTests extends BaseTest{
         loginSteps
                 .login(EMAIL, PASSWORD, ACCESS_USER_URL + LOGIN_PAGE_URL);
         projectsSteps
-                .createProjectFromDashboard(project);
+                .createProjectFromDashboardAndCheckCreated(project);
         testCasesSteps
-                .createSection(project, section)
-                .createCaseFromSection(testCase1, testCase2);
+                .checkCreatingSection(project, section)
+                .checkCreatingCaseFromSection(testCase1, testCase2);
         testRunsAndResultsSteps
-                .createTestRun(testRun)
+                .checkCreatingTestRun(testRun)
                 .changeRunStatusOfTestCaseToPassed(testCase2)
                 .checkTestStatusInRun(testCase1, "Untested")
                 .checkTestStatusInRun(testCase2, "Passed");

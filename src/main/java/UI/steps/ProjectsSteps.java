@@ -55,7 +55,7 @@ public class ProjectsSteps extends BaseSteps {
     }
 
     @Step("Create project by click on 'Add Project' button on dashboard from the main project list page.")
-    public ProjectsSteps createProjectFromDashboard(Project project) {
+    public ProjectsSteps createProjectFromDashboardAndCheckCreated(Project project) {
         projectsListPage
                 .clickLogo()
                 .waitProjectListIsLoaded();
@@ -100,8 +100,9 @@ public class ProjectsSteps extends BaseSteps {
 
     @Step("Delete all projects if the are presented.")
     public void deleteProjectAfterTest() {
-        if (!pageIsLoaded(LOGIN_PAGE_URL)
-                && !pageIsLoaded("https://secure.testrail.com/customers/testrail/trial/")
+        if (!isPageLoaded(LOGIN_PAGE_URL)
+                && !isPageLoaded(REGISTRATION_PAGE_URL)
+                && !isPageLoaded(REGISTRATION_CONFIRM_PAGE_URL)
                 && !projectsListPage.getListOfProjects().isEmpty()) {
             adminPage
                     .clickNavigationAdminButton()

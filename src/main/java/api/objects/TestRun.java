@@ -7,19 +7,16 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Project {
+public class TestRun {
 
     @Expose
     String name;
 
+    @SerializedName("suite_id")
     @Expose
-    String announcement;
+    int suiteId;
 
-    @SerializedName("show_announcement")
+    @SerializedName("include_all")
     @Expose
-    boolean showAnnouncement;
-
-    @SerializedName("suite_mode")
-    @Expose
-    int suiteMode;
+    boolean includeAll;
 }

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AddTestRunModalPage extends BasePage{
+public class AddTestRunModalPage extends BasePage {
 
     @FindBy(id = "accept")
     WebElement addTestRunButton;
@@ -26,7 +26,7 @@ public class AddTestRunModalPage extends BasePage{
         waiter.waitForElementDisplayed(driver, "editSectionDescription", 10);
         new Input(driver)
                 .deleteTextFromInput("addRunFormName")
-                .writeTextToInput("addRunFormName", testRun.getTestRunName());
+                .slowTypeToInput("addRunFormName", testRun.getTestRunName());
         new Input(driver).writeTextToInput("addRunFormRefs", testRun.getReferences());
         new Input(driver).writeTextToInput("editSectionDescription", testRun.getDescription());
         new Checkbox(driver).selectCheckboxById("includeAll", true);

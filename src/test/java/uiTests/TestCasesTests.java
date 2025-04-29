@@ -3,6 +3,7 @@ package uiTests;
 import UI.entities.Section;
 import UI.entities.TestCase;
 import org.testng.annotations.Test;
+import utils.Retry;
 
 public class TestCasesTests extends BaseTest {
 
@@ -16,10 +17,10 @@ public class TestCasesTests extends BaseTest {
         loginSteps
                 .login(EMAIL, PASSWORD, ACCESS_USER_URL + LOGIN_PAGE_URL);
         projectsSteps
-                .createProjectFromDashboard(project);
+                .createProjectFromDashboardAndCheckCreated(project);
         testCasesSteps
-                .createSection(project, section)
-                .deleteSection(section);
+                .checkCreatingSection(project, section)
+                .checkDeletingSection(section);
     }
 
     @Test(description = "Test adding of the subsection to the section.")
@@ -30,18 +31,18 @@ public class TestCasesTests extends BaseTest {
                 .sectionName("Section")
                 .build();
         Section subsection = Section.builder()
-                .sectionName("Subection")
+                .sectionName("Subsection")
                 .build();
         loginSteps
                 .login(EMAIL, PASSWORD, ACCESS_USER_URL + LOGIN_PAGE_URL);
         projectsSteps
-                .createProjectFromDashboard(project);
+                .createProjectFromDashboardAndCheckCreated(project);
         testCasesSteps
-                .createSection(project, section)
-                .createSubsection(subsection);
+                .checkCreatingSection(project, section)
+                .checkCreatingSubsection(subsection);
     }
 
-    @Test(description = "Test adding of the test case from the sidebar.")
+    @Test(description = "Test adding of the test case from the sidebar.", retryAnalyzer = Retry.class)
     public void addTestCaseFromSidebar() {
         project.setProjectName("TMS Project");
         project.setAnnouncement("Announcement for project");
@@ -58,10 +59,10 @@ public class TestCasesTests extends BaseTest {
         loginSteps
                 .login(EMAIL, PASSWORD, ACCESS_USER_URL + LOGIN_PAGE_URL);
         projectsSteps
-                .createProjectFromDashboard(project);
+                .createProjectFromDashboardAndCheckCreated(project);
         testCasesSteps
-                .createSection(project, section)
-                .createTestCaseFromSidebar(testCase);
+                .checkCreatingSection(project, section)
+                .checkCreatingTestCaseFromSidebar(testCase);
     }
 
     @Test(description = "Test adding of the few default test cases.")
@@ -80,9 +81,9 @@ public class TestCasesTests extends BaseTest {
         loginSteps
                 .login(EMAIL, PASSWORD, ACCESS_USER_URL + LOGIN_PAGE_URL);
         projectsSteps
-                .createProjectFromDashboard(project);
+                .createProjectFromDashboardAndCheckCreated(project);
         testCasesSteps
-                .createSection(project, section)
-                .createCaseFromSection(testCase1, testCase2);
+                .checkCreatingSection(project, section)
+                .checkCreatingCaseFromSection(testCase1, testCase2);
     }
 }

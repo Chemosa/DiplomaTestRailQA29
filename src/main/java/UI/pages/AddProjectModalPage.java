@@ -24,6 +24,7 @@ public class AddProjectModalPage extends BasePage {
         new Input(driver).writeTextToInput("addEditProjectAnnouncement", announcement);
         new Checkbox(driver).selectCheckbox("addEditProjectShowAnnouncement", true);
         new Button(driver).clickButton("addEditProjectAddButton");
+        waiter.waitForElementDisplayed(driver, "testCaseContentHeaderTitle", 10);
         log.info("Project '{}' is created.", projectName);
         return new ProjectPage(driver);
     }

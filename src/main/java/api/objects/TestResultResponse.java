@@ -7,19 +7,19 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Project {
+public class TestResultResponse {
+
+    @SerializedName("status_id")
+    @Expose
+    int statusId;
+
+    @SerializedName("test_id")
+    @Expose
+    int testId;
 
     @Expose
-    String name;
+    int id;
 
     @Expose
-    String announcement;
-
-    @SerializedName("show_announcement")
-    @Expose
-    boolean showAnnouncement;
-
-    @SerializedName("suite_mode")
-    @Expose
-    int suiteMode;
+    String comment;
 }

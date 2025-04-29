@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class TestRunsAndResultsPage extends BasePage{
+public class TestRunsAndResultsPage extends BasePage {
 
     @FindBy(id = "navigation-runs-add")
     WebElement addTestRunOnSidebarButton;

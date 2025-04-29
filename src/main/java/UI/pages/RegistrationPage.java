@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 @Log4j2
-public class RegistrationPage extends BasePage{
+public class RegistrationPage extends BasePage {
 
     private static final String DROPDOWN_OPTIONS_REGISTRATION_XPATH = "//option[text() = \"%s\"]";
 
@@ -50,15 +50,15 @@ public class RegistrationPage extends BasePage{
      * This method fills registration form with some valid data.
      * @return
      */
-    public RegistrationPage fillRegistrationPage() {
+    public RegistrationPage fillRegistrationPage(String country, String numberOfUsers) {
         new Input(driver).writeTextToInputById("first_name", faker.name().firstName());
         new Input(driver).writeTextToInputById("last_name", faker.name().lastName());
         new Input(driver).writeTextToInputById("email", faker.internet().emailAddress());
         new Input(driver).writeTextToInputById("organization", faker.company().name());
         dropdownRegistrationCountry.click();
-        driver.findElement(By.xpath(String.format(DROPDOWN_OPTIONS_REGISTRATION_XPATH, "Armenia"))).click();
+        driver.findElement(By.xpath(String.format(DROPDOWN_OPTIONS_REGISTRATION_XPATH, country))).click();
         dropdownRegistrationUsers.click();
-        driver.findElement(By.xpath(String.format(DROPDOWN_OPTIONS_REGISTRATION_XPATH, "10"))).click();
+        driver.findElement(By.xpath(String.format(DROPDOWN_OPTIONS_REGISTRATION_XPATH, numberOfUsers))).click();
         new Input(driver).writeTextToInputById("hostname", String.format(faker.name().firstName() + faker.name().lastName()).toLowerCase());
         new Checkbox(driver).selectCheckboxById("tos", true);
         return this;
@@ -94,8 +94,8 @@ public class RegistrationPage extends BasePage{
      */
     public boolean isErrorMessagePresent(String errorMessage) {
         boolean isPresent = false;
-        for(WebElement message : errorMessagesList) {
-            if(message.getText().equals(errorMessage)) {
+        for (WebElement message : errorMessagesList) {
+            if (message.getText().equals(errorMessage)) {
                 isPresent = true;
                 log.info("Error message '{}' is founded", errorMessage);
             }

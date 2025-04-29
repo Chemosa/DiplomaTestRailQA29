@@ -5,7 +5,6 @@ import UI.entities.TestRun;
 import UI.pages.AddTestRunModalPage;
 import UI.pages.ProjectPage;
 import UI.pages.TestRunPage;
-import UI.pages.TestRunsAndResultsPage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -23,7 +22,7 @@ public class TestRunsAndResultsSteps extends BaseSteps {
     }
 
     @Step("Creates new test run.")
-    public TestRunsAndResultsSteps createTestRun(TestRun testRun) {
+    public TestRunsAndResultsSteps checkCreatingTestRun(TestRun testRun) {
         projectPage
                 .clickOnTestRunsSidebarItem()
                 .addTestRunFromSidebar()

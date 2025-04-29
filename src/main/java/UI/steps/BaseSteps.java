@@ -14,7 +14,7 @@ public class BaseSteps implements IConstants {
     }
 
     @Step("Check that page {urlShouldBeOpened} is opened or not")
-    public boolean pageIsLoaded(String urlShouldBeOpened) {
+    public boolean isPageLoaded(String urlShouldBeOpened) {
         return driver.getCurrentUrl().contains(urlShouldBeOpened);
     }
 }

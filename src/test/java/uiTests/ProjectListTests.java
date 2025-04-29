@@ -34,6 +34,6 @@ public class ProjectListTests extends BaseTest {
         loginSteps
                 .login(EMAIL, PASSWORD, ACCESS_USER_URL + LOGIN_PAGE_URL);
         projectsSteps
-                .createProjectFromDashboard(project);
+                .createProjectFromDashboardAndCheckCreated(project);
     }
 }

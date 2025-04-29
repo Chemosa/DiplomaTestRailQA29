@@ -17,6 +17,19 @@ public class Checkbox {
     }
 
     /**
+     * This method check if checkbox should be selected and select or unselect if needed.
+     * @param checkbox
+     * @param selected
+     */
+    public void selectCheckboxIfNeeded(WebElement checkbox, boolean selected) {
+        if (selected && !checkbox.isSelected()) {
+            checkbox.click();
+        } else if (!selected && checkbox.isSelected()) {
+            checkbox.click();
+        }
+    }
+
+    /**
      * This method select specified checkbox found by xpath.
      * @param dataTestIdOfCheckbox
      * @param selected
@@ -24,11 +37,7 @@ public class Checkbox {
     public void selectCheckbox(String dataTestIdOfCheckbox, boolean selected) {
         WebElement checkbox = driver.findElement(By.xpath(String.format(CHECKBOX_XPATH, dataTestIdOfCheckbox)));
         waiter.waitForWebElementBeClickable(driver, checkbox, 10);
-        if (selected && !checkbox.isSelected()) {
-            checkbox.click();
-        } else if (!selected && checkbox.isSelected()) {
-            checkbox.click();
-        }
+        selectCheckboxIfNeeded(checkbox, selected);
     }
 
     /**
@@ -38,11 +47,7 @@ public class Checkbox {
      */
     public void selectElementCheckbox(WebElement checkbox, boolean selected) {
         waiter.waitForWebElementBeClickable(driver, checkbox, 10);
-        if (selected && !checkbox.isSelected()) {
-            checkbox.click();
-        } else if (!selected && checkbox.isSelected()) {
-            checkbox.click();
-        }
+        selectCheckboxIfNeeded(checkbox, selected);
     }
 
     /**
@@ -53,10 +58,6 @@ public class Checkbox {
     public void selectCheckboxById(String id, boolean selected) {
         WebElement checkbox = driver.findElement(By.id(id));
         waiter.waitForWebElementBeClickable(driver, checkbox, 10);
-        if (selected && !checkbox.isSelected()) {
-            checkbox.click();
-        } else if (!selected && checkbox.isSelected()) {
-            checkbox.click();
-        }
+        selectCheckboxIfNeeded(checkbox, selected);
     }
 }

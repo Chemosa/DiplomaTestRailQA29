@@ -5,7 +5,6 @@ import UI.entities.TestCase;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,7 +36,6 @@ public class TestRunPage extends BasePage {
 
     /**
      * This method gets text from informational message.
-     *
      * @return
      */
     public String getTextFromInfoMessage() {
@@ -51,8 +49,7 @@ public class TestRunPage extends BasePage {
     }
 
     /**
-     * This method gets name of the test run.
-     *
+     * This method gets name of test run.
      * @return
      */
     public String getTestRunName() {
@@ -66,7 +63,7 @@ public class TestRunPage extends BasePage {
     }
 
     /**
-     * This method clicks on button to open options for specified test case.
+     * This method opens options menu for certain testcase in test run.
      * @param testCase
      * @return
      */
@@ -85,13 +82,12 @@ public class TestRunPage extends BasePage {
         sleep(2000);
         new Button(driver).clickElementButton(passAndNextButton);
         sleep(2000);
-        log.info("Click button");
         return new TestRunPage(driver);
     }
 
     /**
-     * This method gets test case status as text.
-     *
+     * This method gets status of test case.
+     * @param testCase
      * @return
      */
     public String getTestCaseStatus(TestCase testCase) {

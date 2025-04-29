@@ -40,6 +40,7 @@ public class TestRunPage extends BasePage {
      */
     public String getTextFromInfoMessage() {
         try {
+            waiter.waitForElementDisplayed(driver, "messageSuccessDivBox", 5);
             log.info("Getting informational message.");
             return successfulMessage.getText();
         } catch (Exception noMessage) {
@@ -54,6 +55,7 @@ public class TestRunPage extends BasePage {
      */
     public String getTestRunName() {
         try {
+            waiter.waitForElementDisplayed(driver, "testCaseContentHeaderTitle", 5);
             log.info("Getting project name.");
             return testRunNameInTitle.getText();
         } catch (Exception noName) {

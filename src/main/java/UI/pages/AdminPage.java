@@ -2,6 +2,7 @@ package UI.pages;
 
 import UI.elements.Button;
 import UI.elements.Checkbox;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -62,6 +63,7 @@ public class AdminPage extends HeaderPage {
      * This method deletes all projects from Projects page opened from Admin menu.
      * @return
      */
+    @SneakyThrows
     public AdminPage deleteAllProject() {
         while (true) {
             if (projectsOnPageList.isEmpty()) {
@@ -72,6 +74,7 @@ public class AdminPage extends HeaderPage {
                 deleteProjectButton.click();
                 new Checkbox(driver).selectElementCheckbox(deleteConfirmationCheckbox, true);
                 new Button(driver).clickButton("caseFieldsTabDeleteDialogButtonOk");
+                Thread.sleep(10000);
                 waiter.waitForElementDisplayed(driver, "messageSuccessDivBox", 10);
                 driver.navigate().refresh();
             }

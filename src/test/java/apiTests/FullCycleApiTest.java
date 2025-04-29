@@ -5,7 +5,7 @@ import api.objects.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TestRailTest {
+public class FullCycleApiTest {
 
     SoftAssert softAssert = new SoftAssert();
 

@@ -30,11 +30,12 @@ public class BaseTest implements ITestConstants, IConstants {
     Project project;
 
 //    public static String EMAIL = PropertyReader.getProperty("email");
-    public static String EMAIL = System.getProperty("email", "");
 //    public static String PASSWORD = PropertyReader.getProperty("password");
-    public static String PASSWORD= System.getProperty("password", "");
 //    public static String ACCESS_USER_URL = PropertyReader.getProperty("accessAddress");
-    public static String ACCESS_USER_URL= System.getProperty("accessAddress", "");
+    public static String EMAIL = System.getProperty("email");
+    public static String PASSWORD= System.getProperty("password");
+    public static String ACCESS_USER_URL= System.getProperty("accessAddress");
+
 
     @BeforeMethod
     public void initTest(ITestContext iTestContext) {
@@ -62,12 +63,8 @@ public class BaseTest implements ITestConstants, IConstants {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void deleteProjectAfterTest() {
+    public void deleteProjectAfterTestAndQuit() {
         projectsSteps.deleteProjectAfterTest();
-    }
-
-    @AfterMethod
-    public void endTest() {
         softAssert.assertAll();
         driver.quit();
     }

@@ -25,6 +25,28 @@ public class Waiter {
     }
 
     /**
+     * This method waits till specified web element will be displayed.
+     * @param driver
+     * @param element
+     * @param seconds
+     */
+    public void waitForElementDisplayed(WebDriver driver, WebElement element, long seconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    /**
+     * This method waits till specified element will be displayed.
+     * @param driver
+     * @param xpath
+     * @param seconds
+     */
+    public void waitForElementByXpathDisplayed(WebDriver driver, String xpath, long seconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+    }
+
+    /**
      * This method waits till specified webpage will be loaded.
      * @param driver
      * @param url
@@ -38,11 +60,22 @@ public class Waiter {
     /**
      * This method waits till specified element will disappear.
      * @param driver
+     * @param elementXpath
+     * @param seconds
+     */
+    public void waitForElementDisappearing(WebDriver driver, String elementXpath, long seconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(elementXpath)));
+    }
+
+    /**
+     * This method waits till specified element will be clickable.
+     * @param driver
      * @param element
      * @param seconds
      */
-    public void waitForElementDisappearing(WebDriver driver, String element, long seconds) {
+    public void waitForWebElementBeClickable(WebDriver driver, WebElement element, long seconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(element)));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 }

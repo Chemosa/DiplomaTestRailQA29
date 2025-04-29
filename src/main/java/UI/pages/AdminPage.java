@@ -85,9 +85,9 @@ public class AdminPage extends HeaderPage {
      */
     public boolean checkProjectIsAdded(String projectName) {
         boolean isAdded = false;
-        for(WebElement project : projectsOnPageList) {
-            if(project.getText().equals(projectName) & successfulAddedProjectMessage.isDisplayed()) {
-            isAdded = true;
+        for (WebElement project : projectsOnPageList) {
+            if (project.getText().equals(projectName) & successfulAddedProjectMessage.isDisplayed()) {
+                isAdded = true;
             }
         }
         return isAdded;

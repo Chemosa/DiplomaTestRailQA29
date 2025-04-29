@@ -2,9 +2,8 @@ package uiTests;
 
 import UI.constants.IConstants;
 import UI.entities.Project;
-import UI.steps.BaseSteps;
-import UI.steps.LoginSteps;
-import UI.steps.ProjectsSteps;
+import UI.steps.*;
+import org.testng.annotations.AfterMethod;
 import uiTests.constants.ITestConstants;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import listeners.TestListener;
@@ -13,7 +12,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.asserts.SoftAssert;
@@ -25,6 +23,9 @@ public class BaseTest implements ITestConstants, IConstants {
     BaseSteps baseSteps;
     LoginSteps loginSteps;
     ProjectsSteps projectsSteps;
+    TestCasesSteps testCasesSteps;
+    RegistrationSteps registrationSteps;
+    TestRunsAndResultsSteps testRunsAndResultsSteps;
     SoftAssert softAssert;
     Project project;
 
@@ -52,6 +53,9 @@ public class BaseTest implements ITestConstants, IConstants {
         baseSteps = new BaseSteps(driver);
         loginSteps = new LoginSteps(driver);
         projectsSteps = new ProjectsSteps(driver);
+        testCasesSteps = new TestCasesSteps(driver);
+        registrationSteps = new RegistrationSteps(driver);
+        testRunsAndResultsSteps = new TestRunsAndResultsSteps(driver);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -61,6 +65,7 @@ public class BaseTest implements ITestConstants, IConstants {
 
     @AfterMethod
     public void endTest() {
+        softAssert.assertAll();
         driver.quit();
     }
 }

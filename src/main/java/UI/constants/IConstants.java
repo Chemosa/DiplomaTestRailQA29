@@ -8,6 +8,7 @@ public interface IConstants {
     String REGISTRATION_PAGE_URL = "https://secure.testrail.com/customers/testrail/trial/?type=signup";
     String REGISTRATION_CONFIRM_PAGE_URL = "https://secure.testrail.com/customers/testrail/trial/progress?";
     String TEST_RUN_LIST_PAGE_URL = "/index.php?/runs/overview/";
+    String TEST_RUN_PAGE_URL = "/index.php?/runs/view/";
     String TEST_CASES_LIST_PAGE_URL = "/index.php?/suites/view/";
     String TEST_CASE_PAGE_URL = "/index.php?/cases/view/";
 }

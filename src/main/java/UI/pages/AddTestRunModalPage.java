@@ -31,6 +31,7 @@ public class AddTestRunModalPage extends BasePage {
         new Input(driver).writeTextToInput("editSectionDescription", testRun.getDescription());
         new Checkbox(driver).selectCheckboxById("includeAll", true);
         new Button(driver).clickElementButton(addTestRunButton);
+        waiter.waitForPageOpened(driver, TEST_RUN_PAGE_URL, 10);
         return new TestRunPage(driver);
     }
 }

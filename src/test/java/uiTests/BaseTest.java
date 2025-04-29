@@ -65,6 +65,10 @@ public class BaseTest implements ITestConstants, IConstants {
     @AfterMethod(alwaysRun = true)
     public void deleteProjectAfterTestAndQuit() {
         projectsSteps.deleteProjectAfterTest();
+    }
+
+    @AfterMethod
+    public void quit() {
         softAssert.assertAll();
         driver.quit();
     }

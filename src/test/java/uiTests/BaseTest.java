@@ -29,9 +29,12 @@ public class BaseTest implements ITestConstants, IConstants {
     SoftAssert softAssert;
     Project project;
 
-    String EMAIL = PropertyReader.getProperty("email");
-    String PASSWORD = PropertyReader.getProperty("password");
-    String ACCESS_USER_URL = PropertyReader.getProperty("accessAddress");
+//    public static String EMAIL = PropertyReader.getProperty("email");
+    public static String EMAIL = System.getProperty("email", "");
+//    public static String PASSWORD = PropertyReader.getProperty("password");
+    public static String PASSWORD= System.getProperty("password", "");
+//    public static String ACCESS_USER_URL = PropertyReader.getProperty("accessAddress");
+    public static String ACCESS_USER_URL= System.getProperty("accessAddress", "");
 
     @BeforeMethod
     public void initTest(ITestContext iTestContext) {

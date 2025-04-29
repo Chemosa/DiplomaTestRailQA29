@@ -11,8 +11,10 @@ import static io.restassured.RestAssured.given;
 public class BaseAdapter implements IConstants {
 
     Gson gson = new Gson();
-    String auth = PropertyReader.getProperty("email") + ":" + PropertyReader.getProperty("api_key");
-    String BASE_URL = PropertyReader.getProperty("accessAddress");
+//    String auth = PropertyReader.getProperty("email") + ":" + PropertyReader.getProperty("apiKey");
+    String auth = System.getProperty("email") + ":" + System.getProperty("apiKey");
+//    String ACCESS_USER_URL = PropertyReader.getProperty("accessAddress");
+    String ACCESS_USER_URL = System.getProperty("accessAddress");
     String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
 
     /**
@@ -27,7 +29,7 @@ public class BaseAdapter implements IConstants {
                         .header("Authorization", "Basic " + encodedAuth)
                         .header(CONTENT_TYPE, CONTENT_TYPE_VALUE)
                         .when()
-                        .get(BASE_URL + url)
+                        .get(ACCESS_USER_URL + url)
                         .then()
                         .log().all()
                         .statusCode(200)
@@ -48,7 +50,7 @@ public class BaseAdapter implements IConstants {
                         .header(CONTENT_TYPE, CONTENT_TYPE_VALUE)
                         .body(body)
                         .when()
-                        .post(BASE_URL + url)
+                        .post(ACCESS_USER_URL + url)
                         .then()
                         .log().all()
                         .extract().body().asString();

@@ -1,18 +1,21 @@
-package UI.steps;
+package cucumberSteps;
 
 import UI.constants.IConstants;
 import UI.pages.RegistrationPage;
+import UI.steps.BaseSteps;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.asserts.SoftAssert;
 
+@Log4j2
 public class CucumberSteps implements IConstants {
     WebDriver driver;
     BaseSteps baseSteps;
@@ -36,6 +39,7 @@ public class CucumberSteps implements IConstants {
     public void userWantsToGetTrialVersionOfAccessToTestrailCom() {
         registrationPage
                 .openRegistrationPage(REGISTRATION_PAGE_URL);
+        log.info("Registration page is opened");
     }
 
     @When("User fill the registration form")
@@ -48,6 +52,7 @@ public class CucumberSteps implements IConstants {
     public void clickSubmissionButtonToCreateAccount() {
         registrationPage
                 .clickCreateAccountButton();
+        log.info("Creating of the account...");
     }
 
     @Then("Message about confirmation via email should appear an another page")
@@ -55,5 +60,7 @@ public class CucumberSteps implements IConstants {
         softAssert.assertTrue(baseSteps.isPageLoaded(REGISTRATION_CONFIRM_PAGE_URL));
         softAssert.assertTrue(registrationPage.getConfirmationMessage().contains("Waiting for email confirmation from"));
         softAssert.assertAll();
+        log.info("Registration is correct!");
+        driver.quit();
     }
 }

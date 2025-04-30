@@ -1,7 +1,15 @@
-<suite name="TestRail Suite" parallel="methods" thread-count="5">
-    <test name="TestRail registration test">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestRail Suite" parallel="tests" thread-count="2">
+    <test name="TestRail Tests">
         <classes>
-            <class name="utils.RunnerTest"/>
+            <class name="apiTests.FullCycleApiTest"/>
+            <class name="uiTests.LoginTests"/>
+            <class name="uiTests.ProjectListTests"/>
+            <class name="uiTests.RegistrationTest"/>
+            <class name="uiTests.RunnerCucumberTest"/>
+            <class name="uiTests.TestCasesTests"/>
+            <class name="uiTests.TestRunsTests"/>
         </classes>
     </test>
 </suite>

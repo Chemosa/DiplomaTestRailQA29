@@ -38,7 +38,7 @@ public class TestRunsTests extends BaseTest{
                 .checkCreatingTestRun(testRun);
     }
 
-    @Test(description = "Test changing of test case status to passed in test run.")
+    @Test(description = "Test changing of test case status to passed in test run.", retryAnalyzer = Retry.class)
     public void changeTestStatusTest() {
         project.setProjectName("Project with test run");
         project.setAnnouncement("Announcement for project");

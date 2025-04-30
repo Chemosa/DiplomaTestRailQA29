@@ -74,8 +74,6 @@ public class AdminPage extends HeaderPage {
                 deleteProjectButton.click();
                 new Checkbox(driver).selectElementCheckbox(deleteConfirmationCheckbox, true);
                 new Button(driver).clickButton("caseFieldsTabDeleteDialogButtonOk");
-                Thread.sleep(10000);
-                waiter.waitForElementDisplayed(driver, "messageSuccessDivBox", 10);
                 driver.navigate().refresh();
             }
         }

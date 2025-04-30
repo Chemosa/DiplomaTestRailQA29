@@ -36,7 +36,6 @@ public class BaseTest implements ITestConstants, IConstants {
     public static String PASSWORD= System.getProperty("password");
     public static String ACCESS_USER_URL= System.getProperty("accessAddress");
 
-
     @BeforeMethod
     public void initTest(ITestContext iTestContext) {
         WebDriverManager.chromedriver().setup();

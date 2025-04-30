@@ -68,7 +68,7 @@ public class ProjectsSteps extends BaseSteps {
             projectsListPage
                     .clickAddProjectFromDashboardButton()
                     .fillNewProjectForm(project.getProjectName(), project.getAnnouncement());
-            Assert.assertTrue(adminPage.checkProjectIsAdded(project.getProjectName()));
+            Assert.assertEquals(projectPage.getProjectName(), project.getProjectName());
         }
         return this;
     }

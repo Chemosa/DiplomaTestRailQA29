@@ -1,8 +1,8 @@
 package uiTests;
 
-import UI.constants.IConstants;
-import UI.entities.Project;
-import UI.steps.*;
+import ui.constants.IConstants;
+import ui.entities.Project;
+import ui.steps.*;
 import org.testng.annotations.AfterMethod;
 import uiTests.constants.ITestConstants;
 import io.github.bonigarcia.wdm.WebDriverManager;

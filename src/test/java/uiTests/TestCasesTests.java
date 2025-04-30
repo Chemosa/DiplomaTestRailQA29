@@ -1,7 +1,7 @@
 package uiTests;
 
-import UI.entities.Section;
-import UI.entities.TestCase;
+import ui.entities.Section;
+import ui.entities.TestCase;
 import org.testng.annotations.Test;
 import utils.Retry;
 

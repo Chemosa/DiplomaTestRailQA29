@@ -1,8 +1,8 @@
 package cucumberSteps;
 
-import UI.constants.IConstants;
-import UI.pages.RegistrationPage;
-import UI.steps.BaseSteps;
+import ui.constants.IConstants;
+import ui.pages.RegistrationPage;
+import ui.steps.BaseSteps;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
